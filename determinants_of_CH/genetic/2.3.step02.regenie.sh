@@ -16,6 +16,16 @@ use Anaconda
 source activate regenie_env
 #########################################################################
 
+## April 4, 2023
+### updated phenotype
+## glm w/o pred: regenie --step 2 --ignore-pred --pgen /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_EurAm_chr5.1kg_imp --bt --htp EA --phenoFile /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/aric_baseline_n_v05_ea_PCA_GWAS.2023Apr3.v2.tsv --phenoColList incident_CH_or_growingClones,incident_CH,incident_DTA,incident_SF,incident_DDR,incident_DNMT3A,incident_TET2,incident_ASXL1 --covarFile /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/aric_baseline_n_v05_ea_PCA_GWAS.2023Apr3.v2.tsv --covarColList "age_base,age_base_sqr,PC{1:10}" --catCovarList "Sex,Center,v2_vs_other" --verbose --minCaseCount 5 --bsize 400 --minMAC 20 --range 5:753744-1753744 --out chr5.tert.ea
+## Firth w/o pred: regenie --step 2 --ignore-pred --pgen /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_EurAm_chr5.1kg_imp --bt --htp EA --phenoFile /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/aric_baseline_n_v05_ea_PCA_GWAS.2023Apr3.v2.tsv --phenoColList incident_CH_or_growingClones,incident_CH,incident_DTA,incident_SF,incident_DDR,incident_DNMT3A,incident_TET2,incident_ASXL1 --covarFile /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/aric_baseline_n_v05_ea_PCA_GWAS.2023Apr3.v2.tsv --covarColList "age_base,age_base_sqr,PC{1:10}" --catCovarList "Sex,Center,v2_vs_other" --firth --approx --pThresh 0.01 --verbose --minCaseCount 5 --bsize 400 --minMAC 20 --range 5:753744-1753744 --out chr5.tert.ea.firth 1>>tet.log 2>>test.log &
+## with pred: regenie --step 2 --pred /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/NULL_MODEL.EA_pred.list --pgen /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_EurAm_chr5.1kg_imp --bt --htp EA --phenoFile /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/aric_baseline_n_v05_ea_PCA_GWAS.2023Apr3.v2.tsv --phenoColList incident_CH_or_growingClones,incident_CH,incident_DTA,incident_SF,incident_DDR,incident_DNMT3A,incident_TET2,incident_ASXL1 --covarFile /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/aric_baseline_n_v05_ea_PCA_GWAS.2023Apr3.v2.tsv --covarColList "age_base,age_base_sqr,PC{1:10}" --catCovarList "Sex,Center,v2_vs_other" --firth --approx --pThresh 0.01 --verbose --minCaseCount 5 --bsize 400 --minMAC 20 --range 5:753744-1753744 --out chr5.tert.ea.firth_pred 1>>tet.pred.log 2>>test.pred.log &
+
+
+### AfrAm: qsub -wd /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/tmpdir  -t 1-22 -R y -l h_vmem=10G -l h_rt=40:00:00 -pe smp 4 -binding linear:4 -N step2.aric_imp_AA /medpop/esp2/mesbah/tools/longitudinal-profiling-of-clonal-hematopoiesis/determinants_of_CH/genetic/step02.regenie.sh /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/aric_baseline_n_v05_aa_PCA_GWAS.2023Apr3.v2.tsv incident_CH_or_growingClones,incident_CH,incident_DTA,incident_SF,incident_DDR,incident_DNMT3A,incident_TET2,incident_ASXL1 age_base,age_base_sqr,PC{1:10} Sex,Center,v2_vs_other 400 /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/step2 AfrAm 0.01 /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/NULL_MODEL.AA_pred.list 20 4
+
+# EurAm: qsub -wd /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/tmpdir  -t 1-22 -R y -l h_vmem=10G -l h_rt=40:00:00 -pe smp 4 -binding linear:4 -N step2.aric_imp_EA /medpop/esp2/mesbah/tools/longitudinal-profiling-of-clonal-hematopoiesis/determinants_of_CH/genetic/step02.regenie.sh /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/aric_baseline_n_v05_ea_PCA_GWAS.2023Apr3.v2.tsv incident_CH_or_growingClones,incident_CH,incident_DTA,incident_SF,incident_DDR,incident_DNMT3A,incident_TET2,incident_ASXL1 age_base,age_base_sqr,PC{1:10} Sex,Center,v2_vs_other 400 /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/step2 EurAm 0.01 /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/NULL_MODEL.EA_pred.list 20 4
 #############
 ## 
 # AfrAm: qsub -wd /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/tmpdir  -t 1-22 -R y -l h_vmem=10G -l h_rt=40:00:00 -pe smp 4 -binding linear:4 -N step2.aric_imp_AA /medpop/esp2/mesbah/tools/clonal_hematopoiesis/longitudinal_CH/aric/gwas/step02.regenie.sh /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen /medpop/esp2/mesbah/projects/ch_progression/aric/aric_baseline_n_v05_aa_PCA_GWAS.2023Feb20.tsv incident_CH,incident_CHvaf10,incident_DTA,incident_SF,incident_DDR,incident_DNMT3A,incident_TET2,incident_ASXL1 age_base,age_base2,PC{1:10} Sex,center,v2_vs_other 400 /medpop/esp2/mesbah/projects/ch_progression/aric/gwas AfrAm 0.01 /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/NULL_MODEL.AA_pred.list 20 4
@@ -98,6 +108,8 @@ regenie \
 	--pred ${STEP1_LIST_FILE} \
 	--minMAC ${MIN_MAC} \
 	--threads ${cpus} \
+	--verbose \
+	--minCaseCount 5 \
 	--out ${OUT_PREFIX}
 
 ######### Clock time #########
