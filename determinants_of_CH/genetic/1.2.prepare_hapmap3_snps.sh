@@ -2,27 +2,37 @@
 
 
 ## remove duplicate snp id (i.e. multi-allelic snps with same snpid)
-for chr in {1..22}; do awk -F'\t' 'NR>1{print $3}' /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_EurAm_chr${chr}.1kg_imp.pvar | sort -V | uniq -c | awk '$1==1{print $2}' >> /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/chr1_22.noDup.maf1_info30.EA.snplist; done
+# for chr in {1..22}; do awk -F'\t' 'NR>1{print $3}' /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_EurAm_chr${chr}.1kg_imp.pvar | sort -V | uniq -c | awk '$1==1{print $2}' >> /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/chr1_22.noDup.maf1_info30.EA.snplist; done
 
-for chr in {1..22}; do awk -F'\t' 'NR>1{print $3}' /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_AfrAm_chr${chr}.1kg_imp.pvar | sort -V | uniq -c | awk '$1==1{print $2}' >> /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/chr1_22.noDup.maf1_info30.AA.snplist; done
+# for chr in {1..22}; do awk -F'\t' 'NR>1{print $3}' /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_AfrAm_chr${chr}.1kg_imp.pvar | sort -V | uniq -c | awk '$1==1{print $2}' >> /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/chr1_22.noDup.maf1_info30.AA.snplist; done
+for chr in {1..22}; do awk -F'\t' 'NR>1{print $3}'  /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/ARIC_EurAm_chr${chr}.1kg_imp.pvar | sort -V | uniq -c | awk '$1==1{print $2}' >> /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/chr1_22.noDup.maf1_info30.EA.snplist; done &
+
+
+for chr in {1..22}; do awk -F'\t' 'NR>1{print $3}'  /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/ARIC_AfrAm_chr${chr}.1kg_imp.pvar | sort -V | uniq -c | awk '$1==1{print $2}' >> /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/chr1_22.noDup.maf1_info30.AA.snplist; done &
+
 
 ## AA
 # /medpop/esp2/yruan/tools/hapmap3.snplist
 # make bed
-for chr in {1..22}; do /medpop/esp2/mesbah/others/tools/plink2_linux_x86_64_20200831 --pfile /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_AfrAm_chr${chr}.1kg_imp --extract /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/chr1_22.noDup.maf1_info30.AA.snplist --make-bed --out /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr${chr}.hapmap3; done 1>/broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/log_aa_hap3.txt 2>/broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/err_aa_hap3.txt &
+# for chr in {1..22}; do /medpop/esp2/mesbah/others/tools/plink2_linux_x86_64_20200831 --pfile /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_AfrAm_chr${chr}.1kg_imp --extract /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/chr1_22.noDup.maf1_info30.AA.snplist --make-bed --out /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr${chr}.hapmap3; done 1>/broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/log_aa_hap3.txt 2>/broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/err_aa_hap3.txt &
+for chr in {1..22}; do /medpop/esp2/mesbah/others/tools/plink2_linux_x86_64_20200831 --pfile /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/ARIC_AfrAm_chr${chr}.1kg_imp --extract /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/chr1_22.noDup.maf1_info30.AA.snplist --make-bed --out /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/ARIC_AfrAm_chr${chr}.hapmap3; done 1>>/medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/tmpdir/log_aa_hap3.txt 2>>/medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/tmpdir/err_aa_hap3.txt &
 
-rm /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/aa_list_beds.txt
-for chr in {2..22}; do echo "/broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr${chr}.hapmap3.bed /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr${chr}.hapmap3.bim /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr${chr}.hapmap3.fam" >> /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/aa_list_beds.txt; done
+#rm /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/aa_list_beds.txt
+
+# for chr in {2..22}; do echo "/broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr${chr}.hapmap3.bed /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr${chr}.hapmap3.bim /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr${chr}.hapmap3.fam" >> /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/aa_list_beds.txt; done
+for chr in {2..22}; do echo "/medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/ARIC_AfrAm_chr${chr}.hapmap3.bed /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/ARIC_AfrAm_chr${chr}.hapmap3.bim /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/ARIC_AfrAm_chr${chr}.hapmap3.fam" >> /medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen/aa_list_beds.txt; done
 
 ## 
 use .plink-1.90b
+bedDir=/medpop/esp2/mesbah/datasets/topmed/aric_phs000090_GENEVA/pgen
+# plink --bed ${bedDir}/ARIC_AfrAm_chr1.hapmap3.bed --bim ${bedDir}/ARIC_AfrAm_chr1.hapmap3.bim --fam ${bedDir}/ARIC_AfrAm_chr1.hapmap3.fam --merge-list ${bedDir}/aa_list_beds.txt --make-bed --out ${bedDir}/ARIC_AfrAm_chr1_22.hapmap3
 plink \
-	--bed /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1.hapmap3.bed \
-	--bim /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1.hapmap3.bim \
-        --fam /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1.hapmap3.fam \
-        --merge-list /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/aa_list_beds.txt \
+	--bed ${bedDir}/ARIC_AfrAm_chr1.hapmap3.bed \
+	--bim ${bedDir}/ARIC_AfrAm_chr1.hapmap3.bim \
+        --fam ${bedDir}/ARIC_AfrAm_chr1.hapmap3.fam \
+        --merge-list ${bedDir}/aa_list_beds.txt \
 	--make-bed \
-	--out /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1_22.hapmap3
+	--out ${bedDir}/ARIC_AfrAm_chr1_22.hapmap3
 
 # for chr in {1..22}; do /medpop/esp2/mesbah/others/tools/plink2_linux_x86_64_20200831 --pfile /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_AfrAm_chr${chr}.1kg_imp --extract /medpop/esp2/yruan/tools/hapmap3.snplist --maf 0.05 --geno 0.1 --hwe 1e-10 --mind 0.1 --write-snplist allow-dups --write-samples --no-id-header --out /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/snp_2_keep/ARIC_AfrAm_chr${chr}.qcd; done 1>log_aa.txt 2>err_aa.txt &
 
@@ -30,18 +40,18 @@ plink \
 
 
 ## EA
-for chr in {1..22}; do /medpop/esp2/mesbah/others/tools/plink2_linux_x86_64_20200831 --pfile /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_EurAm_chr${chr}.1kg_imp --extract /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/chr1_22.noDup.maf1_info30.EA.snplist --make-bed --out /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr${chr}.hapmap3; done 1>/broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/log_ea_hap3.txt 2>/broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/err_ea_hap3.txt &
+for chr in {1..22}; do /medpop/esp2/mesbah/others/tools/plink2_linux_x86_64_20200831 --pfile ${bedDir}/ARIC_EurAm_chr${chr}.1kg_imp --extract ${bedDir}/chr1_22.noDup.maf1_info30.EA.snplist --make-bed --out ${bedDir}/ARIC_EurAm_chr${chr}.hapmap3; done 1>>${bedDir}/tmpdir/log_ea_hap3.txt 2>>${bedDir}/tmpdir/err_ea_hap3.txt &
 ## 
-rm /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ea_list_beds.txt
-for chr in {2..22}; do echo "/broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr${chr}.hapmap3.bed /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr${chr}.hapmap3.bim /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr${chr}.hapmap3.fam" >> /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ea_list_beds.txt; done
-
+# rm /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ea_list_beds.txt
+for chr in {2..22}; do echo "${bedDir}/ARIC_EurAm_chr${chr}.hapmap3.bed ${bedDir}/ARIC_EurAm_chr${chr}.hapmap3.bim ${bedDir}/ARIC_EurAm_chr${chr}.hapmap3.fam" >> ${bedDir}/ea_list_beds.txt; done
+# #plink --bed ${bedDir}/ARIC_EurAm_chr1.hapmap3.bed --bim ${bedDir}/ARIC_EurAm_chr1.hapmap3.bim --fam ${bedDir}/ARIC_EurAm_chr1.hapmap3.fam --merge-list ${bedDir}/ea_list_beds.txt --make-bed --out ${bedDir}/ARIC_EurAm_chr1_22.hapmap3
 plink \
-	--bed /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr1.hapmap3.bed \
-	--bim /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr1.hapmap3.bim \
-	--fam /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr1.hapmap3.fam \
-	--merge-list /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ea_list_beds.txt \
+	--bed ${bedDir}/ARIC_EurAm_chr1.hapmap3.bed \
+	--bim ${bedDir}/ARIC_EurAm_chr1.hapmap3.bim \
+	--fam ${bedDir}/ARIC_EurAm_chr1.hapmap3.fam \
+	--merge-list ${bedDir}/ea_list_beds.txt \
 	--make-bed \
-	--out /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr1_22.hapmap3
+	--out ${bedDir}/ARIC_EurAm_chr1_22.hapmap3
 
 
 ### PCA
