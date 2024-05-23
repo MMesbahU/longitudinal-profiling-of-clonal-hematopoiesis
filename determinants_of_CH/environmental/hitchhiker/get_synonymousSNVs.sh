@@ -39,4 +39,7 @@ while read vcf_file
 gzip -f ${outdir}/hiseq_baseline.nrow_${num_start}_${num_end}.tsv
 
 ## to combine all 
-# zcat /medpop/esp2/mesbah/datasets/CHIP/ARIC/hiseq_vcf/baseline/hiseq_baseline.nrow_1501_2000.tsv.gz | gzip -c > /medpop/esp2/mesbah/datasets/CHIP/ARIC/hiseq_vcf/baseline/all_HiSeq_baseline.tsv.gz; for files in $(ls -lh /medpop/esp2/mesbah/datasets/CHIP/ARIC/hiseq_vcf/baseline/hiseq_baseline.nrow_*.tsv.gz | awk '{print $NF}'); do zcat ${files} | awk 'NR>1{print $0}' | gzip -c >> /medpop/esp2/mesbah/datasets/CHIP/ARIC/hiseq_vcf/baseline/all_HiSeq_baseline.tsv.gz; done & 
+# zcat /medpop/esp2/mesbah/datasets/CHIP/ARIC/hiseq_vcf/baseline/hiseq_baseline.nrow_1501_2000.tsv.gz | head -1 | gzip -c > /medpop/esp2/mesbah/datasets/CHIP/ARIC/hiseq_vcf/baseline/all_HiSeq_baseline.tsv.gz
+
+# for files in $(ls -l /medpop/esp2/mesbah/datasets/CHIP/ARIC/hiseq_vcf/baseline/hiseq_baseline.nrow_*.tsv.gz | awk '{print $NF}'); do zcat ${files} | awk 'NR>1{print $0}' | gzip -c >> /medpop/esp2/mesbah/datasets/CHIP/ARIC/hiseq_vcf/baseline/all_HiSeq_baseline.tsv.gz; done & 
+
