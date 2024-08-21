@@ -1,6 +1,6 @@
 
-### Perform inverse-variance weighted meta-analysis in R
-
+### Perform inverse-variance weighted fixed effect meta-analysis in R
+# P values are from two-sided Z-tests
 ################### Inverse-variance weighted meta-analysis ####
 ivw_meta <- function(b, bSE) {
   # Calculate weights
@@ -16,6 +16,7 @@ ivw_meta <- function(b, bSE) {
   Z <- overall_beta / overall_se
   
   # Calculate p-value
+    # P values are from two-sided Z-tests
   pval <- 2 * (1 - pnorm(abs(Z)))
   # pval <- 2 * pnorm(abs(Z), lower.tail = FALSE)
   return(list(beta = overall_beta, 
