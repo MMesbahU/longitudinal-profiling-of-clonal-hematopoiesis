@@ -2,18 +2,18 @@
 
 
 
-1. [Identification of CHIP in ARIC](https://github.com/MMesbahU/longitudinal-profiling-of-clonal-hematopoiesis/tree/main/detect_CH) 
+1. [Identification of CHIP in ARIC](https://github.com/MMesbahU/longitudinal-profiling-of-clonal-hematopoiesis/tree/main/detect_CHIP) 
 
 * CHIP in *U2AF1* were identified using scripts in (https://github.com/MMesbahU/U2AF1_pileup)
 
 
-2. [Environmnetal determinants of CHIP](https://github.com/MMesbahU/longitudinal-profiling-of-clonal-hematopoiesis/tree/main/determinants_of_CH/environmental)
+2. [Environmnetal determinants of CHIP](https://github.com/MMesbahU/longitudinal-profiling-of-clonal-hematopoiesis/tree/main/determinants_of_CHIP/environmental)
 
 
-* [Role of synonymous passenger mutations](https://github.com/MMesbahU/longitudinal-profiling-of-clonal-hematopoiesis/tree/main/determinants_of_CH/environmental/hitchhiker) 
+* [Role of synonymous passenger mutations](https://github.com/MMesbahU/longitudinal-profiling-of-clonal-hematopoiesis/tree/main/determinants_of_CHIP/environmental/hitchhiker) 
 
 
-3. [Genetic determinants of CH](https://github.com/MMesbahU/longitudinal-profiling-of-clonal-hematopoiesis/tree/main/determinants_of_CH/genetic)
+3. [Genetic determinants of CHIP](https://github.com/MMesbahU/longitudinal-profiling-of-clonal-hematopoiesis/tree/main/determinants_of_CHIP/genetic)
 
 
 
