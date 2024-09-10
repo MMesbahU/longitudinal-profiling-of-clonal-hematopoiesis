@@ -18,4 +18,4 @@
 
 
 ### Reference
-1. Uddin MM*, Saadatagah S*, Niroula A, Yu B, Hornsby WE, Ganesh S, Lannery K, Schuermans A, Honigberg MC, Bick AG, Libby P, Ebert BL, Ballantyne CM, Natarajan P. (2024). [Long-term longitudinal analysis of 4,187 participants reveals insights into determinants of clonal hematopoiesis.](https://doi.org:10.1038/s41467-024-52302-9). *Nature Communications* 15(1):7858. doi:10.1038/s41467-024-52302-9.
+1. Uddin MM*, Saadatagah S*, ... ..., Ballantyne CM, Natarajan P. (2024). [Long-term longitudinal analysis of 4,187 participants reveals insights into determinants of clonal hematopoiesis](https://doi.org:10.1038/s41467-024-52302-9). *Nature Communications* 15(1):7858. doi:10.1038/s41467-024-52302-9.
