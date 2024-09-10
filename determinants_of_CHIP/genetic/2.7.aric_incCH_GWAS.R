@@ -1,6 +1,6 @@
 
 ###### GWAS Overlap
-setwd("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/meta_aric/")
+setwd("/ch_progression/aric/gwas/gwas_current/meta_aric/")
 library(data.table)
 library(dplyr)
 rg22_ch_dnmt_tet <- fread("../../rg2022/rg22_ch_dnmt_tet.hg19.csv", header=T)
@@ -163,7 +163,7 @@ table(asxl1$varID_aric==asxl1$varID_hg19)
 asxl1[(asxl1$varID_aric==asxl1$varID_hg19),]
 
 ##### named variants
-## while read pheno; do zgrep -wf <(awk 'NR>1{print $14}' /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/rg2022/rg22_ch_dnmt_tet.hg19.tsv | sort -V | uniq) /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/meta_aric/meta_aric_N3015.chr1_22.ea2378_aa637.incident_${pheno}.out.gz > /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/meta_aric/rg22_variants.${pheno}.tsv; done < <(echo -e "CH\nCH_or_growingClones\nDTA\nSF\nDDR\nDNMT3A\nTET2\nASXL1" ) &
+## while read pheno; do zgrep -wf <(awk 'NR>1{print $14}' /ch_progression/aric/gwas/rg2022/rg22_ch_dnmt_tet.hg19.tsv | sort -V | uniq) /ch_progression/aric/gwas/gwas_current/meta_aric/meta_aric_N3015.chr1_22.ea2378_aa637.incident_${pheno}.out.gz > /ch_progression/aric/gwas/gwas_current/meta_aric/rg22_variants.${pheno}.tsv; done < <(echo -e "CH\nCH_or_growingClones\nDTA\nSF\nDDR\nDNMT3A\nTET2\nASXL1" ) &
 rg_ch <- fread("rg22_variants.CH.tsv", header = F)
 names(rg_ch) <- c("varID","reference_allele",	"other_allele",
                   "eaf",	"beta",	"se",	"beta_95L",	"beta_95U",	
@@ -243,14 +243,14 @@ require(openxlsx)
 list_of_datasets <- list("CH"=rg_ch,"CH_pls_grt" =rg_ch_pls, 
                          "DTA"=rg_dta, "SF"=rg_sf, "DDR"=rg_ddr, 
                          "DNMT3A"=rg_dnmt, "TET2"=rg_tet,"ASXL1"=rg_asxl)
-write.xlsx(list_of_datasets, file = "~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableS.rg22_lead_vars.xlsx")
+write.xlsx(list_of_datasets, file = "/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableS.rg22_lead_vars.xlsx")
 
 
 # all p<=0.1 within +-500k of RG22 GWAS loci
 all_p10.ist_of_datasets <- list("CH"=ch,"CH_pls_grt" =ch_growth, 
                          "DTA"=dta, "SF"=sf, "DDR"=ddr, 
                          "DNMT3A"=dnmt, "TET2"=tet,"ASXL1"=asxl1)
-write.xlsx(all_p10.ist_of_datasets, file = "~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableS.aric__p10.rg22_lead_pls500kb.xlsx")
+write.xlsx(all_p10.ist_of_datasets, file = "/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableS.aric__p10.rg22_lead_pls500kb.xlsx")
 
 ## get LD 
 # https://cran.r-project.org/web/packages/LDlinkR/vignettes/LDlinkR.html
@@ -261,7 +261,7 @@ LDproxy(snp = "chr14:96180685",
         pop = "CEU", 
         r2d = "r2",
         token = "94afd01dbc34",
-        file = "~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TET2.TCL1A.LD.tsv", 
+        file = "/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TET2.TCL1A.LD.tsv", 
         genome_build = "grch37")
 
 tcl1a_tet <- LDproxy(snp = "chr14:96180685",
@@ -274,7 +274,7 @@ tcl1a_tet <- LDproxy(snp = "chr14:96180685",
 ## /medpop/esp2/mesbah/tools/plink2_linux_x86_64_20200831 --pgen /broad/hptmp/mesbah/dataset/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_EurAm_chr14.1kg_imp.pgen --psam /broad/hptmp/mesbah/dataset/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_EurAm_chr14.1kg_imp.psam --pvar /broad/hptmp/mesbah/dataset/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/ARIC_EurAm_chr14.1kg_imp.pvar  --ld rs3087688 rs11846938
 ## 
 ###########
-setwd("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/meta_aric/")
+setwd("/ch_progression/aric/gwas/gwas_current/meta_aric/")
 rg22.chip_hg38tohg19 <- fread("../../rg2022/ch_rg22.hg19.csv", 
                               header = T, sep = ",")
 names(rg22.chip_hg38tohg19)
@@ -301,7 +301,7 @@ rg22_ch_dnmt_tet <- as.data.frame(rbind(rg22.chip_hg38tohg19, rg22.dnmt3a_hg38to
 
 ############
 # CH phenotypes for GWAS
-setwd("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/rg2022/")
+setwd("/ch_progression/aric/gwas/rg2022/")
 # load prev. CH GWAS loci 
 chip_hg38tohg19 <- fread("ch_rg22.hg19.csv", header=T)
 str(chip_hg38tohg19)  
@@ -382,11 +382,11 @@ fwrite(aric_baseline_n_v05_aa_gwas, "../aric_baseline_n_v05_aa_PCA_GWAS.2023Apr3
 ##### RG 2022 GWAS 
 library(readxl)
 library(data.table)
-ch_rg22 <- read_excel("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/41586_2022_5448_MOESM5_ESM.xlsx", 
+ch_rg22 <- read_excel("/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/41586_2022_5448_MOESM5_ESM.xlsx", 
                       sheet = 3)
-dnmt3a_rg22 <- read_excel("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/41586_2022_5448_MOESM5_ESM.xlsx", 
+dnmt3a_rg22 <- read_excel("/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/41586_2022_5448_MOESM5_ESM.xlsx", 
                       sheet = 12)
-tet2_rg22 <- read_excel("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/41586_2022_5448_MOESM5_ESM.xlsx", 
+tet2_rg22 <- read_excel("/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/41586_2022_5448_MOESM5_ESM.xlsx", 
                       sheet = 15)
 # BiocManager::install("liftOver")
 # BiocManager::install("TxDb.Hsapiens.UCSC.hg38.knownGene")
@@ -399,7 +399,7 @@ library(GenomicRanges)
 # tx_hg19 <- transcripts(TxDb.Hsapiens.UCSC.hg19.knownGene)
 # unzipped chain file needed
 # Load Chain file
-hg38_to_19_chain = import.chain( "~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/hg38ToHg19.over.chain")
+hg38_to_19_chain = import.chain( "/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/hg38ToHg19.over.chain")
 
 ch_rg22$CHROM <- paste0("chr",ch_rg22$Chr)
 hg38.chip_df <- ch_rg22[,c(46, 4, 4,2)]
@@ -472,18 +472,18 @@ dnmt3a_hg38tohg19$End_500kb <- dnmt3a_hg38tohg19$POS_hg19+500000
 tet2_hg38tohg19$Start_500kb <- tet2_hg38tohg19$POS_hg19-500000
 tet2_hg38tohg19$End_500kb <- tet2_hg38tohg19$POS_hg19+500000
 
-fwrite(chip_hg38tohg19, "/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/2023_gwas/rg2022/ch_rg22.hg19.csv", 
+fwrite(chip_hg38tohg19, "/Meta_GWAS/2023_gwas/rg2022/ch_rg22.hg19.csv", 
        row.names = F, col.names = T, sep = ",")
-fwrite(dnmt3a_hg38tohg19, "/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/2023_gwas/rg2022/dnmt3a_rg22.hg19.csv", 
+fwrite(dnmt3a_hg38tohg19, "/Meta_GWAS/2023_gwas/rg2022/dnmt3a_rg22.hg19.csv", 
        row.names = F, col.names = T, sep = ",")
-fwrite(tet2_hg38tohg19, "/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/2023_gwas/rg2022/tet2_rg22.hg19.csv", 
+fwrite(tet2_hg38tohg19, "/Meta_GWAS/2023_gwas/rg2022/tet2_rg22.hg19.csv", 
        row.names = F, col.names = T, sep = ",")
 
-save.image("/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/2023_gwas/rg2022/rg22_gwas_loci.hg19.rda")
+save.image("/Meta_GWAS/2023_gwas/rg2022/rg22_gwas_loci.hg19.rda")
 ######################### 
 
 ### GWAS catalog summary 
-ch_regen <- fread("/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/2023_gwas/rg2022/rg22_ch_GCST90165267_buildGRCh38.p5e8.tsv",
+ch_regen <- fread("/Meta_GWAS/2023_gwas/rg2022/rg22_ch_GCST90165267_buildGRCh38.p5e8.tsv",
                   header=T)
 
 ch_regen$CHROM <- paste0("chr",ch_regen$chr)
@@ -508,11 +508,11 @@ ch_hg38tohg19$varID_hg19 <- paste(ch_hg38tohg19$chr_hg19,
                                   ch_hg38tohg19$other_allele, 
                                   ch_hg38tohg19$effect_allele, 
                                   sep=":")
-fwrite(ch_hg38tohg19,"/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/rg2022/rg22_ch_GCST90165267_buildGRCh19.p5e8.csv", 
+fwrite(ch_hg38tohg19,"/ch_progression/aric/gwas/rg2022/rg22_ch_GCST90165267_buildGRCh19.p5e8.csv", 
        row.names = F, col.names = T, sep = ",")
 
   # DNMT3A
-dnmt_regen <- fread("/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/2023_gwas/rg2022/rg22_dnmt3a.GCST90165271_buildGRCh38.p5e8.tsv",
+dnmt_regen <- fread("/Meta_GWAS/2023_gwas/rg2022/rg22_dnmt3a.GCST90165271_buildGRCh38.p5e8.tsv",
                     header=T)
 
 dnmt_regen$CHROM <- paste0("chr",dnmt_regen$chr)
@@ -536,10 +536,10 @@ dnmt3a_hg38tohg19$varID_hg19 <- paste(dnmt3a_hg38tohg19$chr_hg19,
                                       dnmt3a_hg38tohg19$effect_allele, 
                                       sep=":")
 
-fwrite(dnmt3a_hg38tohg19,"/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/rg2022/rg22_DNMT3A_GCST90165271_buildGRCh19.p5e8.csv", 
+fwrite(dnmt3a_hg38tohg19,"/ch_progression/aric/gwas/rg2022/rg22_DNMT3A_GCST90165271_buildGRCh19.p5e8.csv", 
        row.names = F, col.names = T, sep = ",")
   # TET2
-tet_regen <- fread("/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/2023_gwas/rg2022/rg22_tet2_GCST90165281_buildGRCh38.p5e8.tsv",
+tet_regen <- fread("/Meta_GWAS/2023_gwas/rg2022/rg22_tet2_GCST90165281_buildGRCh38.p5e8.tsv",
                    header=T)
 
 tet_regen$CHROM <- paste0("chr",tet_regen$chr)
@@ -563,7 +563,7 @@ tet_hg38tohg19$varID_hg19 <- paste(tet_hg38tohg19$chr_hg19,
                                    tet_hg38tohg19$other_allele, 
                                    tet_hg38tohg19$effect_allele, 
                                   sep=":")
-fwrite(tet_hg38tohg19,"/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/rg2022/rg22_TET_GCST90165281_buildGRCh19.p5e8.csv", 
+fwrite(tet_hg38tohg19,"/ch_progression/aric/gwas/rg2022/rg22_TET_GCST90165281_buildGRCh19.p5e8.csv", 
        row.names = F, col.names = T, sep = ",")
 
 ### Extract ARIC GWAS
@@ -584,12 +584,12 @@ regen.ch_dnmt_tet.v2 <- regen.ch_dnmt_tet[, c(1,2,3,8,
             AAF_UKB=max(effect_allele_frequency),
             INFO_UKB=paste(additional_info, collapse = "|"))
 
-# fwrite(regen.ch_dnmt_tet.v2,"/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/rg2022/rg22_CH_DNMT3A_TET_GCST_buildGRCh19.p5e8.csv", 
+# fwrite(regen.ch_dnmt_tet.v2,"/ch_progression/aric/gwas/rg2022/rg22_CH_DNMT3A_TET_GCST_buildGRCh19.p5e8.csv", 
 #        row.names = F, col.names = T, sep = ",")
 
   ## Extract ARIC SNPs
-setwd("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/meta_aric/")
-# while read pheno; do zgrep -wf <(cut -d',' -f1 /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/rg2022/rg22_CH_DNMT3A_TET_GCST_buildGRCh19.p5e8.csv | awk 'NR>1' | sort -V | uniq) /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/meta_aric/meta_aric_N3015.chr1_22.ea2378_aa637.incident_${pheno}.out.gz > /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/gwas_current/meta_aric/regen_GWAS_Cat_variants.${pheno}.tsv; done < <(echo -e "CH\nCH_or_growingClones\nDTA\nSF\nDDR\nDNMT3A\nTET2\nASXL1" ) &
+setwd("/ch_progression/aric/gwas/gwas_current/meta_aric/")
+# while read pheno; do zgrep -wf <(cut -d',' -f1 /ch_progression/aric/gwas/rg2022/rg22_CH_DNMT3A_TET_GCST_buildGRCh19.p5e8.csv | awk 'NR>1' | sort -V | uniq) /ch_progression/aric/gwas/gwas_current/meta_aric/meta_aric_N3015.chr1_22.ea2378_aa637.incident_${pheno}.out.gz > /ch_progression/aric/gwas/gwas_current/meta_aric/regen_GWAS_Cat_variants.${pheno}.tsv; done < <(echo -e "CH\nCH_or_growingClones\nDTA\nSF\nDDR\nDNMT3A\nTET2\nASXL1" ) &
 ch.aric <- fread("regen_GWAS_Cat_variants.CH.tsv", header = F, 
                  col.names = c("varID_hg19","EA",	"RefA", "EAF",	
                                "beta",	"se",	"beta_95L",	
@@ -657,14 +657,14 @@ ch.aric.v2 <- merge(ch.aric, var2.rg22_ch_dnmt_tet,
 require(openxlsx)
 list_of_datasets <- list("CH"=ch.aric.v2,"DNMT3A"=dnmt3a.aric.v2,
                          "TET2"=tet.aric.v2)
-write.xlsx(list_of_datasets, file = "~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableX.rg22_sig_vars.xlsx")
+write.xlsx(list_of_datasets, file = "/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableX.rg22_sig_vars.xlsx")
 
-fwrite(dnmt3a.aric.v2, "~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/Table.DNMT3A.rg22_sig_vars.csv",
+fwrite(dnmt3a.aric.v2, "/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/Table.DNMT3A.rg22_sig_vars.csv",
        row.names = F, col.names = T, sep=",", na = "NA")
 
-fwrite(ch.aric.v2, "~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/Table.CH.rg22_sig_vars.csv",
+fwrite(ch.aric.v2, "/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/Table.CH.rg22_sig_vars.csv",
        row.names = F, col.names = T, sep=",", na = "NA")
-fwrite(tet.aric.v2, "~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/Table.TET2.rg22_sig_vars.csv",
+fwrite(tet.aric.v2, "/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/Table.TET2.rg22_sig_vars.csv",
        row.names = F, col.names = T, sep=",", na = "NA")
 (var2.rg22_ch_dnmt_tet[var2.rg22_ch_dnmt_tet$chrom==10,c(1,4,5,9)])
 
@@ -691,14 +691,14 @@ fwrite(tet.aric.v2, "~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/Tab
 ####### 
 ## read modified files
 library(readxl)
-ch_overall <- read_excel("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableX.rg22_sig_vars.xlsx", 
+ch_overall <- read_excel("/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableX.rg22_sig_vars.xlsx", 
                          sheet = 2)
 sort(table(ch_overall$Loci))
 
-dnmt3a_only <- read_excel("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableX.rg22_sig_vars.xlsx", 
+dnmt3a_only <- read_excel("/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableX.rg22_sig_vars.xlsx", 
                           sheet = 3)
 sort(table(dnmt3a_only$Loci))
-tet2_only <- read_excel("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableX.rg22_sig_vars.xlsx", 
+tet2_only <- read_excel("/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/TableX.rg22_sig_vars.xlsx", 
                         sheet = 4)
 
 sort(table(tet2_only$Loci[tet2_only$P<=0.05]))
@@ -713,7 +713,7 @@ library(meta)
 library(grid)
 library(scales)
 ###
-plot_gwas <- fread("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/Display/gwas_table_for_plot_GWAS.p05.csv",
+plot_gwas <- fread("/Baylor_ARIC_Exomes/Paper1_ARIC/Display/gwas_table_for_plot_GWAS.p05.csv",
                    header = T, nrows = 28)
 plot_gwas$P_val <- formatC(x = plot_gwas$P, digits = 1,format = "E")
 plot_gwas$OR <- formatC(round(exp(plot_gwas$beta),2))
@@ -754,7 +754,7 @@ b_gwas <- metagen(TE = beta,
                     sm="OR")
 
 
-pdf("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/Display/GWAS.Forest_incidentCH.v1.pdf", 
+pdf("/Baylor_ARIC_Exomes/Paper1_ARIC/Display/GWAS.Forest_incidentCH.v1.pdf", 
     width = 12, height= 16)
 forest(x = b_gwas, 
        sortvar = plot_gwas$var_genes,
@@ -794,7 +794,7 @@ b_gwas.v2 <- metagen(TE = beta,
                      data=plot_gwas,
                      sm="OR")
 
-pdf("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/Display/GWAS.Forest_incidentCH.v2.pdf", 
+pdf("/Baylor_ARIC_Exomes/Paper1_ARIC/Display/GWAS.Forest_incidentCH.v2.pdf", 
     width = 13, height= 8.5)
 forest(x = b_gwas.v2, 
        sortvar = plot_gwas$var_genes,
@@ -833,7 +833,7 @@ dev.off()
 #############################
 ########
 # hg19 combo with hg38
-load(file = "~/Documents/Project/CHIP_annotation/2022_CHIP_Call/ARIC_hg38/March30.all_hg38_novaseq1_10.rda")
+load(file = "/CHIP_annotation/2022_CHIP_Call/ARIC_hg38/March30.all_hg38_novaseq1_10.rda")
 names(pass_AN.chip.hg38_aric) <- make.names(names(pass_AN.chip.hg38_aric),unique = TRUE)
 
 hg19_hg38.chip <- merge(hg19.chip.v2, 
@@ -849,38 +849,38 @@ hg19_hg38.chip_all <- merge(hg19.chip.v2,
 
 ########
 ## Genetic determinant of Clonal Hematopoiesis in ARIC
-setwd("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/")
+setwd("/Baylor_ARIC_Exomes/Paper1_ARIC/")
 
 library(data.table)
 
 ## egtlgen 
-eqtls <- fread("/Volumes/medpop_esp2/mesbah/projects/ch_progression/2019-12-11-cis-eQTLsFDR0.05-ProbeLevel-CohortInfoRemoved-BonferroniAdded.txt.gz")
-il_genes <- eqtls$GeneSymbol[grepl(pattern = "il6|il1|aim2",x = eqtls$GeneSymbol,ignore.case = T)]
-sort(table(il_genes))
-  # Sample size >=20k
-ils <- subset(eqtls, eqtls$GeneSymbol %in% 
-                c("AIM2", "CASP1","CASP5", 
-                  "IFNGR2", "IL10", "IL18BP",
-                  "IL18RAP", "IL1B", "IL1R1",
-                  "IL1R2", "IL6", "IL6ST",
-                  "JAK2", "NEK7", "NRLC4",
-                  "NLRP3", "TNF", "TYK2",
-                  "CARD8", "IFNGR1", "IL18",
-                  "IL18R1", "IL1RAP", "JAK3", 
-                  "STAT4", "STAT6", "IL6R",   
-                  "IL10RA", "IL10RB") & 
-                eqtls$NrSamples>=20000)
+# eqtls <- fread("/ch_progression/2019-12-11-cis-eQTLsFDR0.05-ProbeLevel-CohortInfoRemoved-BonferroniAdded.txt.gz")
+# il_genes <- eqtls$GeneSymbol[grepl(pattern = "il6|il1|aim2",x = eqtls$GeneSymbol,ignore.case = T)]
+# sort(table(il_genes))
+  ## Sample size >=20k
+# ils <- subset(eqtls, eqtls$GeneSymbol %in% 
+   #             c("AIM2", "CASP1","CASP5", 
+    #              "IFNGR2", "IL10", "IL18BP",
+     #             "IL18RAP", "IL1B", "IL1R1",
+      #            "IL1R2", "IL6", "IL6ST",
+       #           "JAK2", "NEK7", "NRLC4",
+        #          "NLRP3", "TNF", "TYK2",
+         #         "CARD8", "IFNGR1", "IL18",
+          #        "IL18R1", "IL1RAP", "JAK3", 
+           #       "STAT4", "STAT6", "IL6R",   
+            #      "IL10RA", "IL10RB") & 
+             #   eqtls$NrSamples>=20000)
 
 # zgrep -E 'rs6542082|rs6542081|rs10172772|rs7589655|rs10265117|rs80004026|rs11766947|rs6976090|rs35116860|rs4845626|rs11265618|rs12048091|rs10908839|rs2229238|rs7514452|rs11999802|rs7033052|rs4372063|rs4587378|rs6476941|rs2149556|rs7036034|rs76576833' /medpop/esp2/mesbah/projects/ch_progression/aric/gwas/EurAm.chr{2,7,1,9}_incident_TET2.regenie.gz|cut -f1-6,9-13
 
 ###
   # CH phenotypes for GWAS
-setwd("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/rg2022/")
+setwd("/ch_progression/aric/gwas/rg2022/")
 # aric_baseline_n_v05 <- fread("aric_baseline_longitudinal.N4189_ch_status.2023Feb20.csv", header = T)
 aric_baseline_n_v05 <- fread("aric_baseline_longitudinal.N4189_ch_status_trajectories.2023Feb21.csv", header = T)
 
   # dbGaP linker
-# aric_dbgap_linker <- fread("~/Documents/Project/dbGap/ARIC/87809/RootStudyConsentSet_phs000280.RootStudy.v7.p1.c1.HMB-IRB/PhenotypeFiles/phs000280.v7.pht001441.v7.p1.ARIC_Sample.MULTI.txt.gz", skip = 10, fill = TRUE, header = T)
+# aric_dbgap_linker <- fread("/dbGap/ARIC/87809/RootStudyConsentSet_phs000280.RootStudy.v7.p1.c1.HMB-IRB/PhenotypeFiles/phs000280.v7.pht001441.v7.p1.ARIC_Sample.MULTI.txt.gz", skip = 10, fill = TRUE, header = T)
 # aric_dbgap_linker <- aric_dbgap_linker[,c(1,2,4,5)]
 # aric_dbgap_linker <- subset(aric_dbgap_linker, !duplicated(aric_dbgap_linker$SAMPLE_ID))
 # table(aric_baseline_n_v05$gwasid %in% aric_dbgap_linker$SAMPLE_ID, exclude = NULL)
@@ -894,9 +894,9 @@ aric_baseline_n_v05 <- fread("aric_baseline_longitudinal.N4189_ch_status_traject
 #                              by.y = "gwasid")
 
 ### PCA:
-# /medpop/esp2/mesbah/others/tools/plink2_linux_x86_64_20200831 --bfile /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr1_22.hapmap3 --extract <(zcat /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/chr1_22.EA.maf1_info30.snp2keep.tsv.gz | awk '$6==2{print $1}') --pca --out ARIC_EurAm_chr1_22.aaray_snps
-# /medpop/esp2/mesbah/others/tools/plink2_linux_x86_64_20200831 --bfile /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1_22.hapmap3 --extract <(zcat /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/chr1_22.AA.maf1_info30.snp2keep.tsv.gz | awk '$6==2{print $1}') --pca --out /broad/hptmp/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1_22.aray_snps
-pca_ea <- fread("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/pca/ARIC_EurAm_chr1_22.aray_snps.eigenvec", header = T)
+# plink2_linux_x86_64_20200831 --bfile /dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_EurAm_chr1_22.hapmap3 --extract <(zcat /dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/chr1_22.EA.maf1_info30.snp2keep.tsv.gz | awk '$6==2{print $1}') --pca --out ARIC_EurAm_chr1_22.aaray_snps
+# plink2_linux_x86_64_20200831 --bfile /dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1_22.hapmap3 --extract <(zcat /dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/chr1_22.AA.maf1_info30.snp2keep.tsv.gz | awk '$6==2{print $1}') --pca --out /dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1_22.aray_snps
+pca_ea <- fread("/ch_progression/aric/pca/ARIC_EurAm_chr1_22.aray_snps.eigenvec", header = T)
 # pca_ea$IID <- as.character(pca_ea$IID)
 table(aric_baseline_n_v05$SUBJECT_ID %in% pca_ea$IID)
 # FALSE  TRUE 
@@ -909,8 +909,8 @@ aric_baseline_n_v05_ea$age_base2 <- aric_baseline_n_v05_ea$age_base^2
 aric_baseline_n_v05_ea_gwas <- aric_baseline_n_v05_ea[, c(1,1,52,53,2:5,13,128,114,37,38,39,40,10,7,58:84,115,116,118:127)]
 names(aric_baseline_n_v05_ea_gwas) <- c("FID","IID", names(aric_baseline_n_v05_ea_gwas)[3:56])
 
-# pca_aa <- fread("/Volumes/mesbah/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1_22.aray_snps.eigenvec", header = T)
-pca_aa <- fread("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/pca/ARIC_AfrAm_chr1_22.aray_snps.eigenvec", header = T)
+# pca_aa <- fread("/dbgaps/aric_phs000090_GENEVA/geneva_qsub/aric_pgen/qcd_hapmap3/ARIC_AfrAm_chr1_22.aray_snps.eigenvec", header = T)
+pca_aa <- fread("/ch_progression/aric/pca/ARIC_AfrAm_chr1_22.aray_snps.eigenvec", header = T)
 
 # pca_aa$IID <- as.character(pca_aa$IID)
 # plot(pca_ea$PC1, pca_ea$PC2)
@@ -947,9 +947,9 @@ names(aric_baseline_n_v05_aa_gwas) <- c("FID","IID", names(aric_baseline_n_v05_a
 #        row.names = F, col.names = T, sep="\t", na="NA", quote = F)
 ### Prev CH GWAS P<5e-8
 # hg37
-tet2 <- fread("/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/rerun/CHIP_GWAS/rerun/p5e-8/summary_p5e8.TET2.tsv")
-dnmt3a <- fread("/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/rerun/CHIP_GWAS/rerun/p5e-8/summary_p5e8.DNMT3A.tsv")
-ch <- fread("/Volumes/medpop_esp2/mesbah/projects/Meta_GWAS/rerun/CHIP_GWAS/rerun/p5e-8/summary_p5e8.CHIP.tsv")
+tet2 <- fread("/Meta_GWAS/rerun/CHIP_GWAS/rerun/p5e-8/summary_p5e8.TET2.tsv")
+dnmt3a <- fread("/Meta_GWAS/rerun/CHIP_GWAS/rerun/p5e-8/summary_p5e8.DNMT3A.tsv")
+ch <- fread("/Meta_GWAS/rerun/CHIP_GWAS/rerun/p5e-8/summary_p5e8.CHIP.tsv")
 
 # library(devtools)
 # install_github("cgrace1978/manhplot", dependencies = T, force = T)
@@ -964,14 +964,14 @@ manhplusplot(infile = infile,
              configfile = configfile, 
              snpfile = snpfile)
              
-manhplusplot(infile = "/Users/muddin/Documents/Project/CHIP_GWAS/2023_metagwas/650k/overlap/summary_p5e8.CHIP.tsv",
+manhplusplot(infile = "/CHIP_GWAS/2023_metagwas/650k/overlap/summary_p5e8.CHIP.tsv",
              outfile = "ch_test",
              showgenes = T,chrname = "CHR", 
              posname = "POS",pvalname = "P", 
              frqname = "EAF")
 
 ## incident CH GWAS 
-tet2_gwas <- fread(cmd="gzcat /Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/EurAm.chr1_22_incident_TET2.regenie.tsv.gz | cut -f1,2,5,6,10-13", 
+tet2_gwas <- fread(cmd="gzcat /ch_progression/aric/gwas/EurAm.chr1_22_incident_TET2.regenie.tsv.gz | cut -f1,2,5,6,10-13", 
                    header = T, fill=TRUE)
 
 tet2_gwas_prev <- merge(tet2_gwas, tet2, by.x="Name", by.y = "MarkerID") 
@@ -982,7 +982,7 @@ tet2p5e4 <- subset(tet2_gwas, tet2_gwas$P<5e-4)
 
 rm(tet2_gwas)
 
-dnmt3a_gwas <- fread(cmd="gzcat /Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/EurAm.chr1_22_incident_DNMT3A.regenie.tsv.gz | cut -f1,2,5,6,10-13", 
+dnmt3a_gwas <- fread(cmd="gzcat /ch_progression/aric/gwas/EurAm.chr1_22_incident_DNMT3A.regenie.tsv.gz | cut -f1,2,5,6,10-13", 
                                   header = T, fill=TRUE)
 
 dnmt3a_gwas_prev <- merge(dnmt3a_gwas, dnmt3a, by.x="Name", by.y = "MarkerID") 
@@ -993,7 +993,7 @@ dnmt3ap5e4 <- subset(dnmt3a_gwas, dnmt3a_gwas$P<5e-4)
 
 rm(dnmt3a_gwas)
 
-asxl1_gwas <- fread(cmd="gzcat /Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/EurAm.chr1_22_incident_ASXL1.regenie.tsv.gz| cut -f1,2,5,6,10-13", 
+asxl1_gwas <- fread(cmd="gzcat /ch_progression/aric/gwas/EurAm.chr1_22_incident_ASXL1.regenie.tsv.gz| cut -f1,2,5,6,10-13", 
                    header = T, fill=TRUE)
 # asxl1_gwas_prev <- merge(asxl1_gwas, asxl1, by.x="Name", by.y = "MarkerID") 
 
@@ -1003,7 +1003,7 @@ asxl1ap5e4 <- subset(asxl1_gwas, asxl1_gwas$P<5e-4)
 
 rm(asxl1_gwas)
 
-ch_gwas <- fread(cmd="gzcat /Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/EurAm.chr1_22_incident_CH.regenie.tsv.gz| cut -f1,2,5,6,10-13", 
+ch_gwas <- fread(cmd="gzcat /ch_progression/aric/gwas/EurAm.chr1_22_incident_CH.regenie.tsv.gz| cut -f1,2,5,6,10-13", 
                  header = T, fill=TRUE)
 ch_gwas_prev <- merge(ch_gwas, ch, by.x="Name", by.y = "MarkerID") 
 
@@ -1031,62 +1031,62 @@ cat(dnmt3a_gwas.eqtl[(dnmt3a_gwas.eqtl$Name=="rs6542082"),])
 
 ### Coloc
 
-library(coloc)
-tet2_gwas <- fread(cmd="gzcat /Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/EurAm.chr1_22_incident_TET2.regenie.tsv.gz | cut -f1,2,5,6,13,14,23,24,27", 
-                   header = T, fill=TRUE)
+# library(coloc)
+# tet2_gwas <- fread(cmd="gzcat /ch_progression/aric/gwas/EurAm.chr1_22_incident_TET2.regenie.tsv.gz | cut -f1,2,5,6,13,14,23,24,27", 
+  #                 header = T, fill=TRUE)
 
-tet2_gwas.eqtl <- merge(tet2_gwas, ils[ils$GeneSymbol=="IL1B",], 
-                        by.x="Name", by.y = "SNP")
+# tet2_gwas.eqtl <- merge(tet2_gwas, ils[ils$GeneSymbol=="IL1B",], 
+  #                      by.x="Name", by.y = "SNP")
  
 # res_coloc <- vector("list", nrow(dnmt3a_cpg_list))
 # for(i in 1:nrow(dnmt3a_cpg_list)){
-prop.table(table(aric_baseline_n_v05$incident_TET2))
+# prop.table(table(aric_baseline_n_v05$incident_TET2))
 # 
 # 0          1 
 # 0.95584276 0.04415724 
-qtl_inc_tet2 <- list(
-    pvalues=tet2_gwas.eqtl$P,
-    N=tet2_gwas.eqtl$N ,
-    beta=tet2_gwas.eqtl$BETA,
-    varbeta=tet2_gwas.eqtl$SE,
-    snp=tet2_gwas.eqtl$Name,
-    type="cc", s=0.04415724,
-    MAF=tet2_gwas.eqtl$AAF)
+# qtl_inc_tet2 <- list(
+  #  pvalues=tet2_gwas.eqtl$P,
+  #  N=tet2_gwas.eqtl$N ,
+  #  beta=tet2_gwas.eqtl$BETA,
+  #  varbeta=tet2_gwas.eqtl$SE,
+  #  snp=tet2_gwas.eqtl$Name,
+  #  type="cc", s=0.04415724,
+  #  MAF=tet2_gwas.eqtl$AAF)
   
-eqtl.il1 <- list(
-  pvalues=tet2_gwas.eqtl$Pvalue,
-  N=tet2_gwas.eqtl$NrSamples ,
-  zscore=tet2_gwas.eqtl$Zscore,
-  snp=tet2_gwas.eqtl$Name,
-  type="quant",
-  MAF=tet2_gwas.eqtl$AAF)
+# eqtl.il1 <- list(
+ # pvalues=tet2_gwas.eqtl$Pvalue,
+ # N=tet2_gwas.eqtl$NrSamples ,
+ # zscore=tet2_gwas.eqtl$Zscore,
+ # snp=tet2_gwas.eqtl$Name,
+ # type="quant",
+ # MAF=tet2_gwas.eqtl$AAF)
   
-  res_coloc <- coloc.abf(qtl_inc_tet2, 
-                            eqtl.il1, 
-                         p12 = 1e-6)
+ # res_coloc <- coloc.abf(qtl_inc_tet2, 
+ #                           eqtl.il1, 
+ #                        p12 = 1e-6)
   
-  dat1 <- runsusie(qtl_inc_tet2)
+#  dat1 <- runsusie(qtl_inc_tet2)
   
-  res_2 <- coloc.susie(qtl_inc_tet2, 
-                         eqtl.il1, 
-                         p12 = 1e-6)
+#  res_2 <- coloc.susie(qtl_inc_tet2, 
+ #                        eqtl.il1, 
+  #                       p12 = 1e-6)
   # test.dnmt3a$summary
 # }
 # cat(res_coloc[[i]])
 # test.dnmt3a < coloc.abf(dnmt3a_dat1, dnmt3a_dat2, p12 = 1e-6)
 
 # library(httr)
-library(dplyr)
-Res_Coloc <- bind_rows(res_coloc) 
-Res_Coloc$cpg <- dnmt3a_cpg_list$Var1
-data.table::fwrite(Res_Coloc, "~/Documents/Project/Methylation/DNAm/Final_results/coloc_CAD2017.dnmt3a.cis_mQTL_dat.csv", row.names = F, sep=",")
+# library(dplyr)
+# Res_Coloc <- bind_rows(res_coloc) 
+# Res_Coloc$cpg <- dnmt3a_cpg_list$Var1
+# data.table::fwrite(Res_Coloc, "/Methylation/DNAm/Final_results/coloc_CAD2017.dnmt3a.cis_mQTL_dat.csv", row.names = F, sep=",")
 
 
 ######## WHI GWAS samples
-topmed_all <- fread("/Volumes/medpop_esp2/projects/topmed/freeze10/phased/bgen/out/freeze.10b.chr5.pass_only.sample", skip=2, header = F)
+# topmed_all <- fread("/topmed/freeze10/phased/bgen/out/freeze.10b.chr5.pass_only.sample", skip=2, header = F)
 ## tar -xvf /medpop/esp2/mesbah/datasets/topmed/whi/90370/topmed-dcc/exchange/phs001237_TOPMed_WGS_WHI/Investigator_Data_Products/CHIP_20200127_phs001237.tar.gz
-ch_var_whi_topmed <- fread("/Volumes/medpop_esp2/mesbah/datasets/topmed/whi/90370/topmed-dcc/exchange/phs001237_TOPMed_WGS_WHI/Investigator_Data_Products/projects/topmed/downloaded_data/investigator_data_products/20190701_CHIP/processed_files/20200127_CHIP/CHIP_20200127_phs001237/CHIP_variants_20200127_phs001237.txt", 
-                   header = T)
+# ch_var_whi_topmed <- fread("/topmed/whi/90370/topmed-dcc/exchange/phs001237_TOPMed_WGS_WHI/Investigator_Data_Products/projects/topmed/downloaded_data/investigator_data_products/20190701_CHIP/processed_files/20200127_CHIP/CHIP_20200127_phs001237/CHIP_variants_20200127_phs001237.txt", 
+  #                 header = T)
 
-ch_whi_topmed <- fread("/Volumes/medpop_esp2/mesbah/datasets/topmed/whi/90370/topmed-dcc/exchange/phs001237_TOPMed_WGS_WHI/Investigator_Data_Products/projects/topmed/downloaded_data/investigator_data_products/20190701_CHIP/processed_files/20200127_CHIP/CHIP_20200127_phs001237/CHIP_calls_20200127_phs001237.txt", 
-                           header = T)
+# ch_whi_topmed <- fread("/topmed/whi/90370/topmed-dcc/exchange/phs001237_TOPMed_WGS_WHI/Investigator_Data_Products/projects/topmed/downloaded_data/investigator_data_products/20190701_CHIP/processed_files/20200127_CHIP/CHIP_20200127_phs001237/CHIP_calls_20200127_phs001237.txt", 
+  #                         header = T)

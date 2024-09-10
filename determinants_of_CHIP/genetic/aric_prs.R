@@ -1,8 +1,8 @@
 
 
 library(data.table)
-# setwd("~/Documents/Project/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/PRS/")
-setwd("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/PRS")
+# setwd("/Baylor_ARIC_Exomes/Paper1_ARIC/GWAS/PRS/")
+setwd("/ch_progression/aric/gwas/PRS")
 
   # phenotype for incident CH
 # aric_baseline_n_v05 <- fread("../../Display/aric_baseline_n_v05_N4187.pheno_ch_status.noHemeCA.correct_lipids.Jun3May2023.csv",
@@ -118,9 +118,9 @@ tet2_aa <- merge(tet2_aa,
 #####################
 
 ##### Save 
-# save.image("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/PRS/PRS.Prev_CH.n_pheno.2023Jul14.rda")
+# save.image("/ch_progression/aric/gwas/PRS/PRS.Prev_CH.n_pheno.2023Jul14.rda")
 ##### PRS and incident CH
-load("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/PRS/PRS.Prev_CH.n_pheno.2023Jul14.rda")
+load("/ch_progression/aric/gwas/PRS/PRS.Prev_CH.n_pheno.2023Jul14.rda")
 
 
 #####
@@ -148,11 +148,11 @@ library(scales) # version 1.2.1
 #   return(list(beta, se, Z, pval))
 # }
 
-source("/Volumes/medpop_esp2/mesbah/tools/longitudinal-profiling-of-clonal-hematopoiesis/determinants_of_CH/genetic/ivw_metaAnalysis.R")
+source("/longitudinal-profiling-of-clonal-hematopoiesis/determinants_of_CH/genetic/ivw_metaAnalysis.R")
 
 
 # set working directory
-setwd("/Volumes/medpop_esp2/mesbah/projects/ch_progression/aric/gwas/PRS")
+setwd("/ch_progression/aric/gwas/PRS")
 # PRS summary
 prs_dat <- fread("ch_prs_std.final_glm.multivariable.incident_ch.2023Jul15.csv", 
                  header = T)
